@@ -36,6 +36,8 @@ class MHZ {
   void setDebug(boolean enable);
 
   boolean isPreHeating();
+  boolean isPreHeatingReal();
+  int remainingPreHeating();
   boolean isReady();
   void setAutoCalibrate(boolean b);
   void calibrateZero();

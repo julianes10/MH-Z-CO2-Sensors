@@ -75,7 +75,7 @@ void MHZ::setDebug(boolean enable) {
   }
 }
 
-boolean MHZ::isPreHeating() {
+boolean MHZ::isPreHeatingReal() {
   if (_type == MHZ14A) {
     return millis() < (MHZ14A_PREHEATING_TIME);
   } else if (_type == MHZ19B) {
@@ -84,6 +84,21 @@ boolean MHZ::isPreHeating() {
     Serial.println(F("MHZ::isPreHeating() => UNKNOWN SENSOR"));
     return false;
   }
+}
+
+int MHZ::remainingPreHeating() {
+  if (_type == MHZ14A) {
+    return (((MHZ14A_PREHEATING_TIME) -  millis())/1000);
+  } else if (_type == MHZ19B) {
+    return  (((MHZ19B_PREHEATING_TIME) - millis())/1000);
+  } else {
+    Serial.println(F("MHZ::isPreHeating() => UNKNOWN SENSOR"));
+    return 0;
+  }
+}
+
+boolean MHZ::isPreHeating() {
+    return false;
 }
 
 boolean MHZ::isReady() {
